@@ -30,7 +30,7 @@ int rangeMinQuery(int segtree[],int qlow,int qhigh,int low, int high,int pos){
 int main(){
     yo;
     int arr[]={1,5,2,6,3};
-    int n=5;
+    int n=sizeof(arr)/sizeof(arr[0]);
     int segtree[(2*n)-1];
     memset(segtree,INT_MAX,sizeof(segtree));
     constructTree(arr,segtree,0,n-1,0);
