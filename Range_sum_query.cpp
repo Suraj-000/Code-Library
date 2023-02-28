@@ -1,0 +1,45 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+#include<stack>
+#include<queue>
+#include<map>
+#include<utility>
+#include<cmath>
+
+#define ll long long int 
+#define yo ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+
+using namespace std;
+
+void constructTree(int arr[],int segtree[],int low ,int high, int pos){
+    if(low==high){
+        segtree[pos]=arr[low];
+        return;
+    }
+    int mid=(low+high)/2;
+    constructTree(arr,segtree,low,mid,2*pos+1);
+    constructTree(arr,segtree,mid+1,high, 2*pos+2);
+    segtree[pos]=segtree[2*pos+1]+segtree[2*pos+2];
+}
+
+int rangeSumQuery(int segtree[], int qlow,int qhigh,int low ,int high , int pos){
+    if(qlow<=low && qhigh>=high)return segtree[pos];
+    if(qlow>high || qhigh <low)return 0;
+    int mid=(low+high)/2;
+    return rangeSumQuery(segtree,qlow,qhigh,low,mid,2*pos+1)+rangeSumQuery(segtree,qlow,qhigh,mid+1,high,2*pos+2);
+}
+
+int main(){
+    yo;
+    int arr[]={1,5,2,6,3};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int segtree[(2*n)-1];
+    memset(segtree,0,sizeof(segtree));
+    constructTree(arr,segtree,0,n-1,0);
+    for(int i=0;i<2*n-1;i++)cout<<segtree[i]<<" ";
+    cout<<endl;
+    cout<<rangeSumQuery(segtree,1,2,0,n-1,0)<<endl;
+    return 0;
+}
