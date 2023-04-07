@@ -34,8 +34,8 @@ int main(){
     int segtree[(2*n)-1];
     memset(segtree,INT_MAX,sizeof(segtree));
     constructTree(arr,segtree,0,n-1,0);
-    for(int i=0;i<((2*n)-1);i++)cout<<segtree[i]<<" ";
+    // for(int i=0;i<((2*n)-1);i++)cout<<segtree[i]<<" ";
     cout<<endl;
-    cout<<rangeMinQuery(segtree,0,3,0,n-1,0)<<endl;
+    cout<<rangeMinQuery(segtree,1,2,0,n-1,0)<<endl;
     return 0;
 }
